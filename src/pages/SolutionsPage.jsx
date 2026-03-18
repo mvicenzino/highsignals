@@ -63,7 +63,7 @@ const labelStyle = {
   fontSize: '10px',
   textTransform: 'uppercase',
   letterSpacing: '0.15em',
-  color: '#2D6A4F',
+  color: '#3EBF70',
   textAlign: 'center',
   marginBottom: '16px',
 }
@@ -85,7 +85,7 @@ export default function SolutionsPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section style={{ width: '100%', background: '#1E3A5F', padding: '120px 0 80px' }}>
+      <section style={{ width: '100%', background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)', padding: '120px 0 80px' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
           <h1
             style={{
@@ -111,20 +111,15 @@ export default function SolutionsPage() {
             HighSignals gives B2B software &amp; AI companies a pressure-tested launch plan
             built to perform under real market scrutiny.
           </p>
-          <a
-            href="#diagnostic"
-            className="solutions-hero-cta"
+          <button
+            className="btn-glass-primary"
             style={{
-              ...greenBtnStyle,
-              display: 'inline-block',
               marginTop: '28px',
-              textDecoration: 'none',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#1E5040')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#2D6A4F')}
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
           >
             Run the Readiness Diagnostic&trade;
-          </a>
+          </button>
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -139,7 +134,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* ── HOW WE ENGAGE ── */}
-      <section style={{ width: '100%', background: '#FFFFFF', padding: '100px 0' }}>
+      <section style={{ width: '100%', background: '#0B1929', padding: '100px 0' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
           <p style={labelStyle}>THE PROCESS</p>
           <h2
@@ -147,7 +142,7 @@ export default function SolutionsPage() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(28px, 3.5vw, 44px)',
               fontWeight: 700,
-              color: '#1E3A5F',
+              color: '#E2E8F0',
               textAlign: 'center',
               marginBottom: '60px',
             }}
@@ -167,7 +162,7 @@ export default function SolutionsPage() {
                       top: '20px',
                       left: 'calc(50% + 20px)',
                       right: 'calc(-50% + 20px)',
-                      borderTop: '2px dashed #E2E8F0',
+                      borderTop: '2px dashed rgba(255, 255, 255, 0.1)',
                     }}
                   />
                 )}
@@ -188,6 +183,7 @@ export default function SolutionsPage() {
                     flexShrink: 0,
                     position: 'relative',
                     zIndex: 1,
+                    boxShadow: '0 4px 12px rgba(45, 106, 79, 0.25)',
                   }}
                 >
                   {step.num}
@@ -197,7 +193,7 @@ export default function SolutionsPage() {
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '16px',
                     fontWeight: 600,
-                    color: '#1E3A5F',
+                    color: '#E2E8F0',
                     marginTop: '16px',
                   }}
                 >
@@ -207,7 +203,7 @@ export default function SolutionsPage() {
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '14px',
-                    color: '#4A5568',
+                    color: 'rgba(226, 232, 240, 0.6)',
                     lineHeight: 1.6,
                     maxWidth: '220px',
                     margin: '8px auto 0',
@@ -242,6 +238,7 @@ export default function SolutionsPage() {
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
+                      boxShadow: '0 4px 12px rgba(45, 106, 79, 0.25)',
                     }}
                   >
                     {step.num}
@@ -250,7 +247,7 @@ export default function SolutionsPage() {
                     <div
                       style={{
                         flex: 1,
-                        borderLeft: '2px dashed #E2E8F0',
+                        borderLeft: '2px dashed rgba(255, 255, 255, 0.1)',
                         minHeight: '24px',
                       }}
                     />
@@ -262,7 +259,7 @@ export default function SolutionsPage() {
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: '16px',
                       fontWeight: 600,
-                      color: '#1E3A5F',
+                      color: '#E2E8F0',
                       margin: 0,
                       lineHeight: '40px',
                     }}
@@ -273,7 +270,7 @@ export default function SolutionsPage() {
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: '14px',
-                      color: '#4A5568',
+                      color: 'rgba(226, 232, 240, 0.6)',
                       lineHeight: 1.6,
                       marginTop: '4px',
                     }}
@@ -288,7 +285,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* ── ENGAGEMENT MODELS ── */}
-      <section style={{ width: '100%', background: '#F8F9FA', padding: '100px 0' }}>
+      <section style={{ width: '100%', background: '#0E1E30', padding: '100px 0' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
           <p style={labelStyle}>ENGAGEMENT OPTIONS</p>
           <h2
@@ -296,7 +293,7 @@ export default function SolutionsPage() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(28px, 3.5vw, 44px)',
               fontWeight: 700,
-              color: '#1E3A5F',
+              color: '#E2E8F0',
               textAlign: 'center',
               marginBottom: '48px',
             }}
@@ -310,13 +307,16 @@ export default function SolutionsPage() {
                 key={eng.name}
                 className="engagement-card"
                 style={{
-                  background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '8px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  border: '1px solid rgba(255, 255, 255, 0.06)',
+                  borderRadius: '16px',
                   padding: '36px',
                   display: 'flex',
                   flexDirection: 'column',
-                  ...(eng.highlighted ? { borderTop: '3px solid #2D6A4F' } : {}),
+                  boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
+                  ...(eng.highlighted ? { borderTop: '3px solid #3EBF70' } : {}),
                   position: 'relative',
                 }}
               >
@@ -330,9 +330,10 @@ export default function SolutionsPage() {
                       fontSize: '11px',
                       fontWeight: 600,
                       color: '#2D6A4F',
-                      background: '#EBF5EE',
+                      background: 'linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(62, 191, 112, 0.08))',
                       padding: '4px 10px',
-                      borderRadius: '4px',
+                      border: '1px solid rgba(45, 106, 79, 0.1)',
+                      borderRadius: '6px',
                     }}
                   >
                     Most Popular
@@ -344,7 +345,7 @@ export default function SolutionsPage() {
                     fontFamily: "'Playfair Display', serif",
                     fontSize: '22px',
                     fontWeight: 700,
-                    color: '#1E3A5F',
+                    color: '#E2E8F0',
                     margin: 0,
                   }}
                 >
@@ -357,7 +358,7 @@ export default function SolutionsPage() {
                     fontSize: '10px',
                     textTransform: 'uppercase',
                     letterSpacing: '0.12em',
-                    color: '#A0AEC0',
+                    color: 'rgba(226, 232, 240, 0.4)',
                     marginTop: '16px',
                     marginBottom: 0,
                   }}
@@ -368,7 +369,7 @@ export default function SolutionsPage() {
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '14px',
-                    color: '#4A5568',
+                    color: 'rgba(226, 232, 240, 0.55)',
                     marginTop: '4px',
                     lineHeight: 1.5,
                   }}
@@ -380,7 +381,7 @@ export default function SolutionsPage() {
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '14px',
-                    color: '#4A5568',
+                    color: 'rgba(226, 232, 240, 0.55)',
                     lineHeight: 1.8,
                     marginTop: '20px',
                   }}
@@ -390,13 +391,12 @@ export default function SolutionsPage() {
 
                 <div style={{ marginTop: 'auto', paddingTop: '24px' }}>
                   <button
-                    className="engagement-cta"
+                    className="btn-glass-primary"
                     style={{
-                      ...greenBtnStyle,
                       width: '100%',
+                      justifyContent: 'center',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.background = '#1E5040')}
-                    onMouseLeave={(e) => (e.currentTarget.style.background = '#2D6A4F')}
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                   >
                     {eng.cta}
                   </button>

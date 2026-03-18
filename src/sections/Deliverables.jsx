@@ -70,7 +70,7 @@ export default function Deliverables() {
   }, []);
 
   return (
-    <section style={{ width: "100%", background: "#FFFFFF", padding: "100px 0" }}>
+    <section style={{ width: "100%", background: "#0E1E30", padding: "100px 0" }}>
       <div style={{ maxWidth: "80rem", margin: "0 auto", padding: "0 1.5rem" }}>
         {/* Header */}
         <div style={{ textAlign: "center" }}>
@@ -80,7 +80,7 @@ export default function Deliverables() {
               fontSize: "10px",
               textTransform: "uppercase",
               letterSpacing: "0.15em",
-              color: "#2D6A4F",
+              color: "#3EBF70",
               marginBottom: "16px",
             }}
           >
@@ -91,7 +91,7 @@ export default function Deliverables() {
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(28px, 3.5vw, 44px)",
               fontWeight: 700,
-              color: "#1E3A5F",
+              color: "#E2E8F0",
               marginBottom: "16px",
             }}
           >
@@ -101,7 +101,7 @@ export default function Deliverables() {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "16px",
-              color: "#4A5568",
+              color: "rgba(226, 232, 240, 0.6)",
               maxWidth: "600px",
               margin: "0 auto",
               marginBottom: "48px",
@@ -127,17 +127,20 @@ export default function Deliverables() {
               data-deliverable-card
               className="deliverable-card"
               style={{
-                border: "1px solid #E2E8F0",
-                borderRadius: "8px",
-                padding: "28px",
+                border: "1px solid rgba(255, 255, 255, 0.06)",
+                borderRadius: "16px",
+                padding: "32px",
                 textAlign: "left",
                 position: "relative",
                 overflow: "hidden",
+                background: "rgba(255, 255, 255, 0.03)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
                 transition: "box-shadow 0.3s",
                 opacity: 0,
                 transform: "translateY(24px)",
-                transitionProperty: "box-shadow, opacity, transform",
-                transitionDuration: "0.3s, 0.5s, 0.5s",
+                transitionProperty: "box-shadow, opacity, transform, border-color",
+                transitionDuration: "0.3s, 0.5s, 0.5s, 0.3s",
               }}
             >
               {/* Number pill */}
@@ -146,10 +149,11 @@ export default function Deliverables() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: "11px",
                   fontWeight: 600,
-                  color: "#2D6A4F",
-                  background: "#EBF5EE",
+                  color: "#3EBF70",
+                  background: "rgba(62, 191, 112, 0.1)",
+                  border: "1px solid rgba(62, 191, 112, 0.15)",
                   padding: "4px 10px",
-                  borderRadius: "4px",
+                  borderRadius: "6px",
                   display: "inline-block",
                 }}
               >
@@ -162,7 +166,7 @@ export default function Deliverables() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: "16px",
                   fontWeight: 600,
-                  color: "#1E3A5F",
+                  color: "#E2E8F0",
                   marginTop: "16px",
                 }}
               >
@@ -174,7 +178,7 @@ export default function Deliverables() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: "14px",
-                  color: "#4A5568",
+                  color: "rgba(226, 232, 240, 0.55)",
                   lineHeight: 1.6,
                   marginTop: "8px",
                 }}
@@ -189,8 +193,9 @@ export default function Deliverables() {
                   position: "absolute",
                   bottom: 0,
                   left: 0,
-                  height: "2px",
-                  background: "#2D6A4F",
+                  height: "3px",
+                  background: "linear-gradient(90deg, #2D6A4F, #3EBF70)",
+                  borderRadius: "0 0 16px 16px",
                   width: "0%",
                   transition: "width 0.3s ease",
                 }}
@@ -201,21 +206,7 @@ export default function Deliverables() {
 
         {/* CTA */}
         <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <button
-            className="deliverables-cta"
-            style={{
-              background: "#2D6A4F",
-              color: "#FFFFFF",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "14px",
-              fontWeight: 500,
-              padding: "14px 28px",
-              borderRadius: "6px",
-              border: "none",
-              cursor: "pointer",
-              transition: "all 0.2s ease",
-            }}
-          >
+          <button className="btn-glass-primary" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
             Start the Conversation &rarr;
           </button>
         </div>
@@ -236,13 +227,12 @@ export default function Deliverables() {
           }
         }
         .deliverable-card:hover {
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.03);
+          transform: translateY(-4px);
+          border-color: rgba(62, 191, 112, 0.15);
         }
         .deliverable-card:hover .deliverable-bar {
           width: 100% !important;
-        }
-        .deliverables-cta:hover {
-          background: #1E5040 !important;
         }
       `}</style>
     </section>

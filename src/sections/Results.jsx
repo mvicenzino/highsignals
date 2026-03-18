@@ -1,41 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
 
-function useCountUp(target, duration = 1500) {
+function useCountUp(target, duration = 2500, trigger = false) {
   const [value, setValue] = useState(0);
-  const ref = useRef(null);
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
+    if (!trigger || hasAnimated.current) return;
+    hasAnimated.current = true;
+    const start = performance.now();
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          const start = performance.now();
+    function animate(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(eased * target));
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
 
-          function animate(now) {
-            const elapsed = now - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setValue(Math.round(eased * target));
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            }
-          }
+    requestAnimationFrame(animate);
+  }, [target, duration, trigger]);
 
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [target, duration]);
-
-  return { ref, value };
+  return value;
 }
 
 const metrics = [
@@ -50,12 +37,14 @@ const testimonials = [
       'HighSignals brings rare clarity to a complex MarTech world, creating momentum that drives real brand impact. They pair disciplined GTM strategy with an unwavering focus on delivering a message buyers understand and trust.',
     name: 'Mark Zagorski',
     role: 'Chief Executive Officer, DoubleVerify',
+    photo: '/headshots/mark-zagorski.webp',
   },
   {
     quote:
       'HighSignals delivered the GTM strategy and leadership that reshaped our market presence, drove double-digit growth, and supported our acquisition by TransUnion. They are MarTech and AdTech authorities, and it shows.',
     name: 'Steve Silvers',
     role: 'Chief Product Officer, Neustar',
+    photo: '/headshots/steve-silvers.jpg',
   },
 ];
 
@@ -65,17 +54,17 @@ const caseStudyMetrics = [
   { number: '1,200', label: 'sales meetings in 7 quarters' },
 ];
 
-function MetricItem({ target, prefix, suffix, label, source }) {
-  const { ref, value } = useCountUp(target);
+function MetricItem({ target, prefix, suffix, label, source, triggered }) {
+  const value = useCountUp(target, 2500, triggered);
 
   return (
-    <div ref={ref} style={{ textAlign: 'center', padding: '0 32px' }}>
+    <div style={{ textAlign: 'center', padding: '0 32px' }}>
       <div
         style={{
           fontFamily: "'Playfair Display', serif",
           fontSize: '64px',
           fontWeight: 700,
-          color: '#2D6A4F',
+          color: '#3EBF70',
           lineHeight: 1.1,
         }}
       >
@@ -87,7 +76,7 @@ function MetricItem({ target, prefix, suffix, label, source }) {
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontSize: '14px',
-          color: '#4A5568',
+          color: 'rgba(226, 232, 240, 0.6)',
           marginTop: '4px',
         }}
       >
@@ -97,7 +86,7 @@ function MetricItem({ target, prefix, suffix, label, source }) {
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontSize: '11px',
-          color: '#A0AEC0',
+          color: 'rgba(226, 232, 240, 0.35)',
           marginTop: '4px',
         }}
       >
@@ -107,13 +96,16 @@ function MetricItem({ target, prefix, suffix, label, source }) {
   );
 }
 
-function TestimonialCard({ quote, name, role }) {
+function TestimonialCard({ quote, name, role, photo }) {
   return (
     <div
       style={{
-        background: '#FFFFFF',
-        border: '1px solid #E2E8F0',
-        borderRadius: '8px',
+        background: 'rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
+        borderRadius: '16px',
+        boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
         padding: '32px',
       }}
     >
@@ -121,7 +113,7 @@ function TestimonialCard({ quote, name, role }) {
         style={{
           fontFamily: "'Playfair Display', serif",
           fontSize: '64px',
-          color: '#EBF5EE',
+          color: 'rgba(62, 191, 112, 0.15)',
           lineHeight: 0,
           marginBottom: '-8px',
         }}
@@ -132,7 +124,7 @@ function TestimonialCard({ quote, name, role }) {
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontSize: '15px',
-          color: '#2D3748',
+          color: 'rgba(226, 232, 240, 0.8)',
           lineHeight: 1.7,
           fontStyle: 'italic',
           margin: 0,
@@ -148,12 +140,15 @@ function TestimonialCard({ quote, name, role }) {
           marginTop: '20px',
         }}
       >
-        <div
+        <img
+          src={photo}
+          alt={name}
           style={{
-            width: '40px',
-            height: '40px',
+            width: '48px',
+            height: '48px',
             borderRadius: '50%',
-            background: '#E2E8F0',
+            objectFit: 'cover',
+            border: '2px solid rgba(62, 191, 112, 0.2)',
             flexShrink: 0,
           }}
         />
@@ -163,7 +158,7 @@ function TestimonialCard({ quote, name, role }) {
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '14px',
               fontWeight: 600,
-              color: '#1E3A5F',
+              color: '#E2E8F0',
             }}
           >
             {name}
@@ -172,7 +167,7 @@ function TestimonialCard({ quote, name, role }) {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '12px',
-              color: '#718096',
+              color: 'rgba(226, 232, 240, 0.45)',
             }}
           >
             {role}
@@ -184,8 +179,27 @@ function TestimonialCard({ quote, name, role }) {
 }
 
 export default function Results() {
+  const metricsRef = useRef(null);
+  const [metricsVisible, setMetricsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = metricsRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setMetricsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.6 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section style={{ width: '100%', background: '#F8F9FA', padding: '100px 0' }}>
+    <section style={{ width: '100%', background: '#0E1E30', padding: '100px 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
         {/* Label */}
         <div
@@ -194,7 +208,7 @@ export default function Results() {
             fontSize: '10px',
             textTransform: 'uppercase',
             letterSpacing: '0.15em',
-            color: '#2D6A4F',
+            color: '#3EBF70',
             textAlign: 'center',
             marginBottom: '16px',
           }}
@@ -204,6 +218,7 @@ export default function Results() {
 
         {/* Headline Metrics — Desktop */}
         <div
+          ref={metricsRef}
           className="results-metrics-desktop"
           style={{
             display: 'flex',
@@ -218,12 +233,12 @@ export default function Results() {
                   style={{
                     width: '1px',
                     height: '80px',
-                    background: '#E2E8F0',
+                    background: 'rgba(255, 255, 255, 0.08)',
                     flexShrink: 0,
                   }}
                 />
               )}
-              <MetricItem {...m} />
+              <MetricItem {...m} triggered={metricsVisible} />
             </div>
           ))}
         </div>
@@ -244,12 +259,12 @@ export default function Results() {
                   style={{
                     height: '1px',
                     width: '120px',
-                    background: '#E2E8F0',
+                    background: 'rgba(255, 255, 255, 0.08)',
                     margin: '24px auto',
                   }}
                 />
               )}
-              <MetricItem {...m} />
+              <MetricItem {...m} triggered={metricsVisible} />
             </div>
           ))}
         </div>
@@ -272,9 +287,12 @@ export default function Results() {
         <div
           style={{
             width: '100%',
-            background: '#FFFFFF',
-            border: '1px solid #E2E8F0',
-            borderRadius: '8px',
+            background: 'rgba(255, 255, 255, 0.03)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+            borderRadius: '16px',
+            boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
             padding: '40px',
             marginTop: '40px',
             boxSizing: 'border-box',
@@ -285,10 +303,11 @@ export default function Results() {
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '11px',
               fontWeight: 600,
-              color: '#2D6A4F',
-              background: '#EBF5EE',
+              color: '#3EBF70',
+              background: 'linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(62, 191, 112, 0.08))',
+              border: '1px solid rgba(45, 106, 79, 0.1)',
               padding: '4px 10px',
-              borderRadius: '4px',
+              borderRadius: '6px',
               display: 'inline-block',
               marginBottom: '20px',
             }}
@@ -311,7 +330,7 @@ export default function Results() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: '#1E3A5F',
+                  color: '#E2E8F0',
                   marginBottom: '8px',
                 }}
               >
@@ -321,7 +340,7 @@ export default function Results() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '14px',
-                  color: '#4A5568',
+                  color: 'rgba(226, 232, 240, 0.6)',
                   lineHeight: 1.6,
                   margin: 0,
                 }}
@@ -335,7 +354,7 @@ export default function Results() {
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: '#1E3A5F',
+                  color: '#E2E8F0',
                   marginTop: '20px',
                   marginBottom: '8px',
                 }}
@@ -346,7 +365,7 @@ export default function Results() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '14px',
-                  color: '#4A5568',
+                  color: 'rgba(226, 232, 240, 0.6)',
                   lineHeight: 1.8,
                   listStyleType: 'disc',
                   paddingLeft: '20px',
@@ -378,7 +397,7 @@ export default function Results() {
                       fontFamily: "'Playfair Display', serif",
                       fontSize: '36px',
                       fontWeight: 700,
-                      color: '#2D6A4F',
+                      color: '#3EBF70',
                       lineHeight: 1.1,
                     }}
                   >
@@ -388,7 +407,7 @@ export default function Results() {
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: '13px',
-                      color: '#4A5568',
+                      color: 'rgba(226, 232, 240, 0.6)',
                       marginTop: '4px',
                     }}
                   >

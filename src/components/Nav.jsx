@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useState, useEffect, useCallback } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Logo from './Logo'
 
 const NAV_LINKS = [
   { label: 'Solutions', to: '/solutions' },
-  { label: 'Verticals', to: '#' },
-  { label: 'Results', to: '#' },
-  { label: 'Resources', to: '#' },
+  { label: 'Verticals', section: 'solutions' },
+  { label: 'Results', section: 'results' },
+  { label: 'Resources', section: 'resources' },
   { label: 'About', to: '/about' },
 ]
 
@@ -13,6 +14,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
@@ -21,89 +23,122 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false)
   }, [location.pathname])
 
-  const isActive = (to) => {
-    if (to === '#') return false
-    return location.pathname === to
+  const isActive = (link) => {
+    if (link.to) return location.pathname === link.to
+    return false
+  }
+
+  const scrollToSection = useCallback((sectionId) => {
+    setMobileOpen(false)
+    if (location.pathname !== '/') {
+      // Navigate home first, then scroll after render
+      navigate('/')
+      setTimeout(() => {
+        const el = document.getElementById(sectionId)
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+    } else {
+      const el = document.getElementById(sectionId)
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [location.pathname, navigate])
+
+  const linkStyle = (link) => ({
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: '13px',
+    fontWeight: isActive(link) ? 500 : 400,
+    letterSpacing: '0.03em',
+    color: isActive(link) ? '#3EBF70' : 'rgba(226, 232, 240, 0.6)',
+    textDecoration: 'none',
+    paddingBottom: '4px',
+    borderBottom: isActive(link) ? '2px solid #3EBF70' : '2px solid transparent',
+    cursor: 'pointer',
+  })
+
+  const mobileLinkStyle = (link) => ({
+    fontFamily: "'DM Sans', sans-serif",
+    fontSize: '14px',
+    letterSpacing: '0.03em',
+    color: isActive(link) ? '#3EBF70' : 'rgba(226, 232, 240, 0.6)',
+    textDecoration: 'none',
+    padding: '10px 0',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+    fontWeight: isActive(link) ? 600 : 400,
+    cursor: 'pointer',
+    display: 'block',
+  })
+
+  const renderLink = (link, style) => {
+    if (link.to) {
+      return (
+        <Link
+          key={link.label}
+          to={link.to}
+          className="relative transition-colors duration-200"
+          style={style}
+          onMouseEnter={(e) => { if (!isActive(link)) e.currentTarget.style.color = '#E2E8F0' }}
+          onMouseLeave={(e) => { if (!isActive(link)) e.currentTarget.style.color = 'rgba(226, 232, 240, 0.6)' }}
+        >
+          {link.label}
+        </Link>
+      )
+    }
+    return (
+      <span
+        key={link.label}
+        role="button"
+        tabIndex={0}
+        className="relative transition-colors duration-200"
+        style={style}
+        onClick={() => scrollToSection(link.section)}
+        onKeyDown={(e) => { if (e.key === 'Enter') scrollToSection(link.section) }}
+        onMouseEnter={(e) => { e.currentTarget.style.color = '#E2E8F0' }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(226, 232, 240, 0.6)' }}
+      >
+        {link.label}
+      </span>
+    )
   }
 
   return (
     <nav
-      className="fixed top-0 left-0 w-full z-50 transition-all duration-200"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'nav-glass' : ''}`}
       style={{
-        backgroundColor: scrolled || mobileOpen ? '#FFFFFF' : 'transparent',
-        borderBottom: scrolled ? '1px solid #E2E8F0' : '1px solid transparent',
-        boxShadow: scrolled ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
+        ...(!scrolled && !mobileOpen ? {
+          backgroundColor: 'transparent',
+          borderBottom: '1px solid transparent',
+        } : {}),
+        ...(mobileOpen && !scrolled ? {
+          backgroundColor: 'rgba(11, 25, 41, 0.95)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+        } : {}),
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        {/* Wordmark */}
-        <Link
-          to="/"
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: '20px',
-            fontWeight: 700,
-            color: '#1E3A5F',
-            textDecoration: 'none',
-          }}
-        >
-          HighSignals
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between" style={{ height: '72px' }}>
+        {/* Logo */}
+        <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
+          <Logo size="default" />
         </Link>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(({ label, to }) => (
-            <Link
-              key={label}
-              to={to}
-              className="relative"
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '13px',
-                letterSpacing: '0.05em',
-                color: isActive(to) ? '#2D6A4F' : '#4A5568',
-                textDecoration: 'none',
-                paddingBottom: '4px',
-                borderBottom: isActive(to) ? '2px solid #2D6A4F' : '2px solid transparent',
-                transition: 'color 0.2s ease, border-color 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive(to)) e.currentTarget.style.color = '#1E3A5F'
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive(to)) e.currentTarget.style.color = '#4A5568'
-              }}
-            >
-              {label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => renderLink(link, linkStyle(link)))}
 
           {/* CTA */}
-          <Link
-            to="#"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#FFFFFF',
-              backgroundColor: '#2D6A4F',
-              padding: '10px 20px',
-              borderRadius: '6px',
-              border: 'none',
-              textDecoration: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1E5040')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#2D6A4F')}
+          <span
+            role="button"
+            tabIndex={0}
+            className="btn-glass-primary"
+            style={{ padding: '10px 20px', fontSize: '13px' }}
+            onClick={() => scrollToSection('resources')}
           >
             Get Your Readiness Score
-          </Link>
+          </span>
         </div>
 
         {/* Mobile hamburger */}
@@ -113,75 +148,37 @@ export default function Nav() {
           aria-label="Toggle navigation menu"
           style={{ background: 'none', border: 'none', cursor: 'pointer' }}
         >
-          <span
-            className="block w-5 h-[2px] transition-all duration-200"
-            style={{
-              backgroundColor: '#4A5568',
-              transform: mobileOpen ? 'rotate(45deg) translateY(7px)' : 'none',
-            }}
-          />
-          <span
-            className="block w-5 h-[2px] transition-all duration-200"
-            style={{
-              backgroundColor: '#4A5568',
-              opacity: mobileOpen ? 0 : 1,
-            }}
-          />
-          <span
-            className="block w-5 h-[2px] transition-all duration-200"
-            style={{
-              backgroundColor: '#4A5568',
-              transform: mobileOpen ? 'rotate(-45deg) translateY(-7px)' : 'none',
-            }}
-          />
+          <span className="block w-5 h-[2px] transition-all duration-300" style={{ backgroundColor: 'rgba(226, 232, 240, 0.7)', transform: mobileOpen ? 'rotate(45deg) translateY(7px)' : 'none' }} />
+          <span className="block w-5 h-[2px] transition-all duration-300" style={{ backgroundColor: 'rgba(226, 232, 240, 0.7)', opacity: mobileOpen ? 0 : 1 }} />
+          <span className="block w-5 h-[2px] transition-all duration-300" style={{ backgroundColor: 'rgba(226, 232, 240, 0.7)', transform: mobileOpen ? 'rotate(-45deg) translateY(-7px)' : 'none' }} />
         </button>
       </div>
 
       {/* Mobile drawer */}
-      {mobileOpen && (
-        <div
-          className="md:hidden w-full px-6 pb-6 pt-2 flex flex-col gap-4"
-          style={{ backgroundColor: '#FFFFFF' }}
-        >
-          {NAV_LINKS.map(({ label, to }) => (
-            <Link
-              key={label}
-              to={to}
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '14px',
-                letterSpacing: '0.05em',
-                color: isActive(to) ? '#2D6A4F' : '#4A5568',
-                textDecoration: 'none',
-                padding: '8px 0',
-                borderBottom: '1px solid #F1F5F9',
-                fontWeight: isActive(to) ? 600 : 400,
-              }}
-            >
-              {label}
-            </Link>
-          ))}
-          <Link
-            to="#"
-            className="text-center"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '13px',
-              fontWeight: 500,
-              color: '#FFFFFF',
-              backgroundColor: '#2D6A4F',
-              padding: '12px 20px',
-              borderRadius: '6px',
-              border: 'none',
-              textDecoration: 'none',
-              cursor: 'pointer',
-              marginTop: '4px',
-            }}
+      <div
+        className="md:hidden"
+        style={{
+          maxHeight: mobileOpen ? '400px' : '0',
+          overflow: 'hidden',
+          transition: 'max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          backgroundColor: 'rgba(11, 25, 41, 0.95)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+        }}
+      >
+        <div className="px-6 pb-6 pt-2 flex flex-col gap-3">
+          {NAV_LINKS.map((link) => renderLink(link, mobileLinkStyle(link)))}
+          <span
+            role="button"
+            tabIndex={0}
+            className="btn-glass-primary"
+            style={{ textAlign: 'center', justifyContent: 'center', marginTop: '8px' }}
+            onClick={() => scrollToSection('resources')}
           >
             Get Your Readiness Score
-          </Link>
+          </span>
         </div>
-      )}
+      </div>
     </nav>
   )
 }

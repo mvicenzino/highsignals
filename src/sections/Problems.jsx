@@ -45,6 +45,7 @@ export default function Problems() {
 
   return (
     <section style={styles.section}>
+      <div style={styles.gridOverlay} />
       <div style={styles.container}>
         <p style={styles.sectionLabel}>THE COST OF GETTING IT WRONG</p>
         <h2 style={styles.headline}>There Is No Margin for Error</h2>
@@ -80,15 +81,7 @@ export default function Problems() {
         </p>
 
         <div style={styles.ctaWrapper}>
-          <button
-            style={styles.ctaButton}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-            }}
-          >
+          <button className="btn-glass-ghost" onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}>
             See the Playbook →
           </button>
         </div>
@@ -100,8 +93,18 @@ export default function Problems() {
 const styles = {
   section: {
     width: "100%",
-    background: "#1E3A5F",
+    background: "linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)",
     padding: "100px 0",
+    position: "relative",
+    overflow: "hidden",
+  },
+  gridOverlay: {
+    position: "absolute",
+    inset: 0,
+    background:
+      "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
+    backgroundSize: "60px 60px",
+    pointerEvents: "none",
   },
   container: {
     maxWidth: "80rem",
@@ -140,10 +143,14 @@ const styles = {
     marginTop: "48px",
   },
   card: {
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.1)",
-    borderRadius: "8px",
+    background: "rgba(255, 255, 255, 0.05)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    borderRadius: "16px",
     padding: "40px 32px",
+    backdropFilter: "blur(12px)",
+    WebkitBackdropFilter: "blur(12px)",
+    boxShadow:
+      "0 4px 24px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)",
     opacity: 0,
     transform: "translateY(24px)",
     transition: "opacity 0.6s ease, transform 0.6s ease",
@@ -178,17 +185,5 @@ const styles = {
   ctaWrapper: {
     textAlign: "center",
     marginTop: "32px",
-  },
-  ctaButton: {
-    background: "transparent",
-    border: "1.5px solid rgba(255,255,255,0.3)",
-    color: "#ffffff",
-    fontFamily: "'DM Sans', sans-serif",
-    fontSize: "14px",
-    fontWeight: 500,
-    padding: "12px 24px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
   },
 };

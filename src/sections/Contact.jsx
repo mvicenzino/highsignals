@@ -47,7 +47,7 @@ export default function Contact() {
 
   const sectionStyle = {
     width: "100%",
-    background: "#FFFFFF",
+    background: "#0E1E30",
     padding: "80px 0",
   };
 
@@ -61,7 +61,7 @@ export default function Contact() {
     fontFamily: "'Playfair Display', serif",
     fontSize: 'clamp(28px, 3.5vw, 44px)',
     fontWeight: 700,
-    color: "#1E3A5F",
+    color: "#E2E8F0",
     textAlign: "center",
     margin: 0,
   };
@@ -69,7 +69,7 @@ export default function Contact() {
   const subheadingStyle = {
     fontFamily: "'DM Sans', sans-serif",
     fontSize: 16,
-    color: "#4A5568",
+    color: "rgba(226, 232, 240, 0.6)",
     textAlign: "center",
     marginTop: 12,
     lineHeight: 1.6,
@@ -80,20 +80,21 @@ export default function Contact() {
     display: "block",
     fontFamily: "'DM Sans', sans-serif",
     fontSize: 12,
-    color: "#718096",
+    color: "rgba(226, 232, 240, 0.45)",
     marginBottom: 6,
   };
 
   const inputStyle = {
     width: "100%",
     padding: "14px 16px",
-    border: "1px solid #E2E8F0",
-    borderRadius: 6,
+    background: "rgba(255, 255, 255, 0.04)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    borderRadius: 12,
     fontFamily: "'DM Sans', sans-serif",
     fontSize: 14,
-    color: "#1A202C",
+    color: "#E2E8F0",
     outline: "none",
-    transition: "border-color 0.2s",
+    transition: "border-color 0.2s, box-shadow 0.2s",
     boxSizing: "border-box",
   };
 
@@ -109,21 +110,6 @@ export default function Contact() {
     marginBottom: 20,
   };
 
-  const buttonStyle = {
-    width: "100%",
-    background: "#2D6A4F",
-    color: "#FFFFFF",
-    fontFamily: "'DM Sans', sans-serif",
-    fontSize: 14,
-    fontWeight: 500,
-    padding: '14px 28px',
-    borderRadius: 6,
-    border: "none",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    marginTop: 8,
-  };
-
   const fields = [
     { name: "firstName", label: "First Name", type: "text" },
     { name: "lastName", label: "Last Name", type: "text" },
@@ -132,7 +118,7 @@ export default function Contact() {
   ];
 
   return (
-    <section style={sectionStyle}>
+    <section id="contact" style={sectionStyle}>
       <div style={containerStyle}>
         <h2 style={headlineStyle}>Let's Talk.</h2>
         <p style={subheadingStyle}>
@@ -149,7 +135,13 @@ export default function Contact() {
               fill="none"
               style={{ display: "block", margin: "0 auto" }}
             >
-              <circle cx="30" cy="30" r="30" fill="#2D6A4F" />
+              <defs>
+                <linearGradient id="check-grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#2D6A4F" />
+                  <stop offset="100%" stopColor="#3EBF70" />
+                </linearGradient>
+              </defs>
+              <circle cx="30" cy="30" r="30" fill="url(#check-grad)" />
               <path
                 d="M18 30L26 38L42 22"
                 stroke="#FFFFFF"
@@ -162,7 +154,7 @@ export default function Contact() {
               style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 22,
-                color: "#1E3A5F",
+                color: "#E2E8F0",
                 textAlign: "center",
                 marginTop: 20,
                 maxWidth: 360,
@@ -188,10 +180,12 @@ export default function Contact() {
                   value={form[field.name]}
                   onChange={handleChange}
                   onFocus={(e) => {
-                    e.target.style.borderColor = "#2D6A4F";
+                    e.target.style.borderColor = "rgba(62, 191, 112, 0.4)";
+                    e.target.style.boxShadow = "0 0 0 3px rgba(62, 191, 112, 0.08)";
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = "#E2E8F0";
+                    e.target.style.borderColor = "rgba(255, 255, 255, 0.08)";
+                    e.target.style.boxShadow = "none";
                   }}
                   style={inputStyle}
                 />
@@ -220,13 +214,8 @@ export default function Contact() {
 
             <button
               type="submit"
-              style={buttonStyle}
-              onMouseEnter={(e) => {
-                e.target.style.background = "#1E5040";
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.background = "#2D6A4F";
-              }}
+              className="btn-glass-primary"
+              style={{ width: '100%', justifyContent: 'center', marginTop: '8px' }}
             >
               Start the Conversation
             </button>

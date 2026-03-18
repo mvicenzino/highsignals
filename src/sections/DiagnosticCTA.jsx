@@ -48,10 +48,23 @@ export default function DiagnosticCTA() {
     <section
       style={{
         width: '100%',
-        background: 'linear-gradient(135deg, #1E3A5F 0%, #162D4A 100%)',
+        background: 'linear-gradient(160deg, #0D1B2A 0%, #162D4A 50%, #0F2235 100%)',
         padding: '80px 0',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
+      {/* Grid pattern overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+          pointerEvents: 'none',
+        }}
+      />
       <div
         style={{
           maxWidth: '1280px',
@@ -98,28 +111,13 @@ export default function DiagnosticCTA() {
               critical dimensions. Takes ~5 minutes. Executive-level output. No
               commitment.
             </p>
-            <a
-              href="#diagnostic"
-              style={{
-                display: 'inline-block',
-                marginTop: '28px',
-                background: '#2D6A4F',
-                color: '#FFFFFF',
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '14px',
-                fontWeight: 500,
-                padding: '16px 32px',
-                borderRadius: '6px',
-                border: 'none',
-                textDecoration: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = '#1E5040')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = '#2D6A4F')}
+            <button
+              className="btn-glass-primary"
+              style={{ fontSize: '15px', padding: '16px 32px', marginTop: '28px' }}
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Get Your Launch Readiness Score &rarr;
-            </a>
+            </button>
             <div
               style={{
                 display: 'flex',
@@ -139,9 +137,12 @@ export default function DiagnosticCTA() {
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '13px',
                     color: 'rgba(255,255,255,0.6)',
+                    display: 'inline-flex',
+                    alignItems: 'center',
                   }}
                 >
-                  &#10003; {item}
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginRight: '4px', flexShrink: 0 }}><circle cx="7" cy="7" r="6" stroke="rgba(62, 191, 112, 0.5)" strokeWidth="1"/><path d="M4.5 7L6.2 8.7L9.5 5.3" stroke="#3EBF70" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  {item}
                 </span>
               ))}
             </div>

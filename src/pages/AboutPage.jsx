@@ -50,17 +50,6 @@ const values = [
   },
 ];
 
-const LinkedInIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-  >
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-  </svg>
-);
 
 export default function AboutPage() {
   return (
@@ -68,7 +57,7 @@ export default function AboutPage() {
       {/* HERO */}
       <section
         style={{
-          background: 'linear-gradient(160deg, #1E3A5F, #2D4A6A)',
+          background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)',
           padding: '120px 0 80px',
           color: '#fff',
         }}
@@ -103,7 +92,7 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM SECTION */}
-      <section style={{ background: '#fff', padding: '80px 0' }}>
+      <section style={{ background: '#0B1929', padding: '80px 0' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <p
             style={{
@@ -111,7 +100,7 @@ export default function AboutPage() {
               fontSize: '10px',
               textTransform: 'uppercase',
               letterSpacing: '0.15em',
-              color: '#2D6A4F',
+              color: '#3EBF70',
               textAlign: 'center',
               marginBottom: '16px',
               marginTop: 0,
@@ -124,7 +113,7 @@ export default function AboutPage() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(28px, 3.5vw, 44px)',
               fontWeight: 700,
-              color: '#1E3A5F',
+              color: '#E2E8F0',
               textAlign: 'center',
               marginBottom: '48px',
               marginTop: 0,
@@ -142,22 +131,32 @@ export default function AboutPage() {
             className="team-grid"
           >
             {teamMembers.map((member) => (
-              <div key={member.name} style={{ textAlign: 'center', padding: '32px' }}>
+              <div key={member.name} style={{ textAlign: 'center', padding: '32px', background: 'rgba(255, 255, 255, 0.03)', backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)', border: '1px solid rgba(255, 255, 255, 0.06)', borderRadius: '16px', transition: 'all 0.3s' }}>
                 <div
                   style={{
                     width: '80px',
                     height: '80px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #EBF5EE, #C6E6D0)',
+                    background: 'linear-gradient(135deg, rgba(62, 191, 112, 0.15), rgba(45, 106, 79, 0.1))',
+                    border: '1px solid rgba(62, 191, 112, 0.2)',
                     margin: '0 auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '24px',
+                    fontWeight: 600,
+                    color: '#3EBF70',
                   }}
-                />
+                >
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </div>
                 <p
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '16px',
                     fontWeight: 600,
-                    color: '#1E3A5F',
+                    color: '#E2E8F0',
                     marginTop: '16px',
                     marginBottom: 0,
                   }}
@@ -168,28 +167,13 @@ export default function AboutPage() {
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '13px',
-                    color: '#718096',
+                    color: 'rgba(226, 232, 240, 0.5)',
                     marginTop: '4px',
                     marginBottom: 0,
                   }}
                 >
                   {member.title}
                 </p>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-block',
-                    marginTop: '12px',
-                    color: '#2D6A4F',
-                    transition: 'color 0.2s',
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = '#1E5040')}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = '#2D6A4F')}
-                >
-                  <LinkedInIcon />
-                </a>
               </div>
             ))}
           </div>
@@ -197,7 +181,7 @@ export default function AboutPage() {
       </section>
 
       {/* ADVISORY BOARD */}
-      <section style={{ background: '#F8F9FA', padding: '80px 0' }}>
+      <section style={{ background: '#0E1E30', padding: '80px 0' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <p
             style={{
@@ -205,7 +189,7 @@ export default function AboutPage() {
               fontSize: '10px',
               textTransform: 'uppercase',
               letterSpacing: '0.15em',
-              color: '#2D6A4F',
+              color: '#3EBF70',
               textAlign: 'center',
               marginBottom: '16px',
               marginTop: 0,
@@ -218,7 +202,7 @@ export default function AboutPage() {
               fontFamily: "'Playfair Display', serif",
               fontSize: 'clamp(28px, 3.5vw, 44px)',
               fontWeight: 700,
-              color: '#1E3A5F',
+              color: '#E2E8F0',
               textAlign: 'center',
               marginBottom: '48px',
               marginTop: 0,
@@ -240,16 +224,26 @@ export default function AboutPage() {
                     width: '60px',
                     height: '60px',
                     borderRadius: '50%',
-                    background: 'linear-gradient(135deg, #EBF5EE, #C6E6D0)',
+                    background: 'linear-gradient(135deg, rgba(62, 191, 112, 0.15), rgba(45, 106, 79, 0.1))',
+                    border: '1px solid rgba(62, 191, 112, 0.2)',
                     margin: '0 auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '18px',
+                    fontWeight: 600,
+                    color: '#3EBF70',
                   }}
-                />
+                >
+                  {advisor.name.split(' ').map(n => n[0]).join('')}
+                </div>
                 <p
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '14px',
                     fontWeight: 600,
-                    color: '#1E3A5F',
+                    color: '#E2E8F0',
                     marginTop: '12px',
                     marginBottom: 0,
                   }}
@@ -260,7 +254,7 @@ export default function AboutPage() {
                   style={{
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: '12px',
-                    color: '#718096',
+                    color: 'rgba(226, 232, 240, 0.5)',
                     marginTop: '4px',
                     lineHeight: 1.4,
                     marginBottom: 0,
@@ -275,7 +269,7 @@ export default function AboutPage() {
       </section>
 
       {/* VALUES SECTION */}
-      <section style={{ background: '#1E3A5F', padding: '80px 0', color: '#fff' }}>
+      <section style={{ background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 100%)', padding: '80px 0', color: '#fff' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
           <h2
             style={{
