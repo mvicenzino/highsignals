@@ -101,11 +101,12 @@ export default function Hero() {
   return (
     <section
       style={{
-        minHeight: '100vh',
+        minHeight: '85vh',
         background: 'linear-gradient(160deg, #0B1929 0%, #10263E 40%, #0D1F32 100%)',
         display: 'flex',
         alignItems: 'center',
         paddingTop: '80px',
+        paddingBottom: '60px',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -317,7 +318,65 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* Scroll indicator */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '28px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '8px',
+          opacity: visible ? 1 : 0,
+          transition: 'opacity 0.6s ease 1.8s',
+          zIndex: 2,
+          cursor: 'pointer',
+        }}
+        onClick={() => {
+          const next = document.querySelector('section + section, section ~ div')
+          if (next) window.scrollTo({ top: next.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' })
+        }}
+      >
+        <span style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontSize: '10px',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          color: 'rgba(226, 232, 240, 0.35)',
+        }}>
+          Scroll
+        </span>
+        <div className="scroll-indicator" style={{
+          width: '20px',
+          height: '32px',
+          borderRadius: '10px',
+          border: '1.5px solid rgba(226, 232, 240, 0.2)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
+          <div className="scroll-dot" style={{
+            width: '3px',
+            height: '6px',
+            borderRadius: '2px',
+            background: '#3EBF70',
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }} />
+        </div>
+      </div>
+
       <style>{`
+        @keyframes scroll-bob {
+          0% { top: 6px; opacity: 1; }
+          50% { top: 16px; opacity: 0.3; }
+          100% { top: 6px; opacity: 1; }
+        }
+        .scroll-dot {
+          animation: scroll-bob 2s ease-in-out infinite;
+        }
         .hero-container { flex-direction: column; }
         .hero-left { width: 100%; }
         .hero-right { display: none !important; }
