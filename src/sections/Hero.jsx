@@ -168,11 +168,11 @@ export default function Hero() {
 
         {/* Right Column — Radar Visual */}
         <div className="hero-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ position: 'relative', width: '320px', height: '320px' }}>
+          <div style={{ position: 'relative', width: 'min(420px, 40vw)', aspectRatio: '1' }}>
             {/* Ambient glow */}
             <div style={{
-              position: 'absolute', inset: '-40px',
-              background: 'radial-gradient(circle, rgba(62, 191, 112, 0.1) 0%, rgba(45, 106, 79, 0.05) 40%, transparent 70%)',
+              position: 'absolute', inset: '-20%',
+              background: 'radial-gradient(circle, rgba(62, 191, 112, 0.12) 0%, rgba(45, 106, 79, 0.04) 50%, transparent 70%)',
               borderRadius: '50%',
               animation: 'glow-pulse 4s ease-in-out infinite',
             }} />
@@ -181,40 +181,47 @@ export default function Hero() {
             <div style={{
               position: 'absolute', inset: '0',
               borderRadius: '50%',
-              background: 'rgba(255, 255, 255, 0.03)',
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255, 255, 255, 0.05)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.2), inset 0 0 60px rgba(255, 255, 255, 0.015)',
+              background: 'rgba(255, 255, 255, 0.025)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.06)',
+              boxShadow: '0 12px 48px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 0 80px rgba(255, 255, 255, 0.01)',
             }} />
 
-            {/* SVG Radar */}
-            <svg viewBox="0 0 380 380" width="100%" height="100%" style={{ position: 'relative', zIndex: 1 }}>
+            {/* SVG Radar — viewBox matched to render size for crisp text */}
+            <svg viewBox="0 0 420 420" width="100%" height="100%" style={{ position: 'relative', zIndex: 1 }}>
+              <defs>
+                <linearGradient id="arc-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#5AEAA8" />
+                  <stop offset="100%" stopColor="#2D8A5E" />
+                </linearGradient>
+              </defs>
+
               {/* Rotating outer ring */}
-              <g style={{ transformOrigin: '190px 190px', animation: 'rotate-slow 60s linear infinite' }}>
-                <circle cx="190" cy="190" r="170" fill="none" stroke="rgba(62, 191, 112, 0.08)" strokeWidth="1" strokeDasharray="4 8" />
+              <g style={{ transformOrigin: '210px 210px', animation: 'rotate-slow 60s linear infinite' }}>
+                <circle cx="210" cy="210" r="195" fill="none" stroke="rgba(62, 191, 112, 0.06)" strokeWidth="1" strokeDasharray="5 10" />
               </g>
 
-              {/* Concentric rings */}
-              {[140, 110, 80, 50].map((r, i) => (
-                <circle key={r} cx="190" cy="190" r={r} fill="none"
-                  stroke={`rgba(62, 191, 112, ${0.05 + i * 0.02})`}
-                  strokeWidth="0.5"
+              {/* Concentric guide rings */}
+              {[160, 125, 90, 55].map((r, i) => (
+                <circle key={r} cx="210" cy="210" r={r} fill="none"
+                  stroke={`rgba(62, 191, 112, ${0.04 + i * 0.02})`}
+                  strokeWidth="0.75"
                 />
               ))}
 
-              {/* Score arcs */}
+              {/* Score arcs — bolder strokes */}
               {[
-                { r: 140, pct: 0.85, color: '#3EBF70', w: 3, delay: '0.5s' },
-                { r: 110, pct: 0.72, color: '#2D6A4F', w: 3, delay: '0.8s' },
-                { r: 80, pct: 0.9, color: '#3EBF70', w: 2.5, delay: '1.1s' },
-                { r: 50, pct: 0.65, color: '#A8DFB8', w: 2, delay: '1.4s' },
+                { r: 160, pct: 0.82, color: 'url(#arc-grad-1)', w: 5, delay: '0.5s' },
+                { r: 125, pct: 0.7, color: '#2D8A5E', w: 4.5, delay: '0.8s' },
+                { r: 90, pct: 0.88, color: '#3EBF70', w: 4, delay: '1.1s' },
+                { r: 55, pct: 0.6, color: '#5AEAA8', w: 3.5, delay: '1.4s' },
               ].map(({ r, pct, color, w, delay }, i) => {
                 const circ = 2 * Math.PI * r
                 return (
                   <circle
                     key={i}
-                    cx="190" cy="190" r={r}
+                    cx="210" cy="210" r={r}
                     fill="none"
                     stroke={color}
                     strokeWidth={w}
@@ -222,96 +229,100 @@ export default function Hero() {
                     strokeDasharray={`${circ * pct} ${circ * (1 - pct)}`}
                     strokeDashoffset={visible ? 0 : circ}
                     style={{
-                      transformOrigin: '190px 190px',
-                      transform: `rotate(${-90 + i * 25}deg)`,
-                      transition: `stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1) ${delay}`,
-                      opacity: 0.7,
+                      transformOrigin: '210px 210px',
+                      transform: `rotate(${-90 + i * 30}deg)`,
+                      transition: `stroke-dashoffset 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${delay}`,
+                      opacity: 0.8,
                     }}
                   />
                 )
               })}
 
-              {/* Spokes + labels */}
+              {/* Spokes + dimension labels */}
               {dimensions.map((label, i) => {
                 const angle = (i * 45 - 90) * Math.PI / 180
-                const labelR = 158
-                const x = 190 + labelR * Math.cos(angle)
-                const y = 190 + labelR * Math.sin(angle)
-                const lineEnd = 145
-                const lx = 190 + lineEnd * Math.cos(angle)
-                const ly = 190 + lineEnd * Math.sin(angle)
+                const labelR = 182
+                const x = 210 + labelR * Math.cos(angle)
+                const y = 210 + labelR * Math.sin(angle)
+                const lineEnd = 165
+                const lx = 210 + lineEnd * Math.cos(angle)
+                const ly = 210 + lineEnd * Math.sin(angle)
                 const dotDist = dotPositions.current[i]
-                const dx = 190 + dotDist * Math.cos(angle)
-                const dy = 190 + dotDist * Math.sin(angle)
+                const dx = 210 + dotDist * Math.cos(angle)
+                const dy = 210 + dotDist * Math.sin(angle)
 
                 return (
                   <g key={label}>
-                    <line x1="190" y1="190" x2={lx} y2={ly} stroke="rgba(255, 255, 255, 0.05)" strokeWidth="0.5" />
+                    <line x1="210" y1="210" x2={lx} y2={ly} stroke="rgba(255, 255, 255, 0.04)" strokeWidth="0.75" />
                     <text
                       x={x} y={y}
                       textAnchor="middle"
                       dominantBaseline="central"
                       style={{
                         fontFamily: "'DM Sans', sans-serif",
-                        fontSize: '9px',
+                        fontSize: '13px',
                         fontWeight: 500,
-                        fill: 'rgba(226, 232, 240, 0.5)',
-                        letterSpacing: '0.03em',
+                        fill: 'rgba(226, 232, 240, 0.55)',
+                        letterSpacing: '0.04em',
                         opacity: visible ? 1 : 0,
                         transition: `opacity 0.5s ease ${0.8 + i * 0.1}s`,
                       }}
                     >
                       {label}
                     </text>
+                    {/* Score dot */}
                     <circle
-                      cx={dx} cy={dy} r={visible ? 4 : 0}
+                      cx={dx} cy={dy} r={visible ? 5 : 0}
                       fill="#3EBF70"
                       style={{
-                        transition: `r 0.4s cubic-bezier(0.4, 0, 0.2, 1) ${1 + i * 0.1}s`,
-                        filter: 'drop-shadow(0 0 6px rgba(62, 191, 112, 0.5))',
+                        transition: `r 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) ${1 + i * 0.1}s`,
+                        filter: 'drop-shadow(0 0 8px rgba(62, 191, 112, 0.5))',
                       }}
                     />
                   </g>
                 )
               })}
 
-              {/* Center score */}
-              <circle cx="190" cy="190" r="28" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(62, 191, 112, 0.15)" strokeWidth="1" />
+              {/* Center — glass circle with score */}
+              <circle cx="210" cy="210" r="38" fill="rgba(11, 25, 41, 0.5)" />
+              <circle cx="210" cy="210" r="38" fill="none" stroke="rgba(62, 191, 112, 0.2)" strokeWidth="1.5" />
               <text
-                x="190" y="185"
+                x="210" y="204"
                 textAnchor="middle"
+                dominantBaseline="central"
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '22px',
+                  fontSize: '32px',
                   fontWeight: 700,
-                  fill: '#3EBF70',
+                  fill: '#4FE0A0',
                   opacity: visible ? 1 : 0,
-                  transition: 'opacity 0.6s ease 1.5s',
+                  transition: 'opacity 0.6s ease 1.6s',
                 }}
               >
                 82
               </text>
               <text
-                x="190" y="201"
+                x="210" y="228"
                 textAnchor="middle"
+                dominantBaseline="central"
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '7px',
-                  fontWeight: 500,
-                  fill: 'rgba(226, 232, 240, 0.45)',
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
+                  fontSize: '10px',
+                  fontWeight: 600,
+                  fill: 'rgba(226, 232, 240, 0.4)',
+                  letterSpacing: '0.14em',
                   opacity: visible ? 1 : 0,
-                  transition: 'opacity 0.6s ease 1.5s',
+                  transition: 'opacity 0.6s ease 1.6s',
                 }}
               >
                 SCORE
               </text>
 
+              {/* Pulse ring */}
               <circle
-                cx="190" cy="190" r="28"
-                fill="none" stroke="#3EBF70" strokeWidth="1"
-                opacity="0.3"
+                cx="210" cy="210" r="38"
+                fill="none" stroke="#3EBF70" strokeWidth="1.5"
+                opacity="0.2"
                 style={{ animation: 'pulse-ring 3s ease-in-out infinite' }}
               />
             </svg>
