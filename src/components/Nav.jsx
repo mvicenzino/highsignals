@@ -124,7 +124,7 @@ export default function Nav() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between" style={{ height: '72px' }}>
         {/* Logo */}
-        <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
+        <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}>
           <Logo size="default" />
         </Link>
 
