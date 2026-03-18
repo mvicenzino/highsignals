@@ -175,7 +175,7 @@ export default function Nav() {
             role="button"
             tabIndex={0}
             className="btn-glass-primary"
-            style={{ textAlign: 'center', justifyContent: 'center', marginTop: '8px' }}
+            style={{ textAlign: 'center', justifyContent: 'center', marginTop: '8px', width: '100%' }}
             onClick={() => scrollToSection('resources')}
           >
             Get Your Readiness Score

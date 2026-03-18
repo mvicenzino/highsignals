@@ -101,7 +101,8 @@ export default function Hero() {
   return (
     <section
       style={{
-        height: '85vh',
+        height: 'auto',
+        minHeight: '85vh',
         maxHeight: '900px',
         background: 'linear-gradient(160deg, #0B1929 0%, #10263E 40%, #0D1F32 100%)',
         display: 'flex',
@@ -141,7 +142,7 @@ export default function Hero() {
 
           {/* CTAs */}
           <div style={{ ...fadeUp(0.3), display: 'flex', flexWrap: 'wrap', gap: '12px', marginTop: '32px', alignItems: 'center' }}>
-            <button className="btn-glass-primary" style={{ fontSize: '15px', padding: '16px 32px' }} onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}>
+            <button className="btn-glass-primary" style={{ fontSize: '15px', padding: '14px 24px' }} onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}>
               Get Your Launch Readiness Score
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '4px' }}>
                 <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -332,6 +333,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div
+        className="scroll-hint"
         style={{
           position: 'absolute',
           bottom: '28px',
@@ -392,6 +394,7 @@ export default function Hero() {
         .hero-container { flex-direction: column; }
         .hero-left { width: 100%; }
         .hero-right { display: none !important; }
+        .hero-left { padding-bottom: 60px; }
         @media (min-width: 768px) {
           .hero-container { flex-direction: row !important; }
           .hero-left { width: 52%; }
@@ -424,6 +427,10 @@ export default function Hero() {
         .fluid-blob-2 { animation: blob-drift-2 22s ease-in-out infinite; }
         .fluid-blob-3 { animation: blob-drift-3 16s ease-in-out infinite; }
         .fluid-blob-4 { animation: blob-drift-4 20s ease-in-out infinite; }
+
+        @media (max-width: 767px) {
+          .scroll-hint { display: none !important; }
+        }
       `}</style>
     </section>
   )

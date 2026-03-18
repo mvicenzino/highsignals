@@ -62,7 +62,7 @@ function MetricItem({ target, prefix, suffix, label, source, triggered }) {
       <div
         style={{
           fontFamily: "'Playfair Display', serif",
-          fontSize: '64px',
+          fontSize: 'clamp(48px, 12vw, 64px)',
           fontWeight: 700,
           color: '#3EBF70',
           lineHeight: 1.1,
@@ -199,7 +199,7 @@ export default function Results() {
   }, []);
 
   return (
-    <section style={{ width: '100%', background: '#0E1E30', padding: '100px 0' }}>
+    <section style={{ width: '100%', background: '#0E1E30', padding: 'clamp(48px, 8vw, 100px) 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
         {/* Label */}
         <div
@@ -216,57 +216,59 @@ export default function Results() {
           WHERE LAUNCH INTELLIGENCE BECOMES REVENUE IMPACT
         </div>
 
-        {/* Headline Metrics — Desktop */}
-        <div
-          ref={metricsRef}
-          className="results-metrics-desktop"
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          {metrics.map((m, i) => (
-            <div key={i} style={{ display: 'contents' }}>
-              {i > 0 && (
-                <div
-                  style={{
-                    width: '1px',
-                    height: '80px',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    flexShrink: 0,
-                  }}
-                />
-              )}
-              <MetricItem {...m} triggered={metricsVisible} />
-            </div>
-          ))}
-        </div>
+        {/* Headline Metrics — wrapper for IntersectionObserver */}
+        <div ref={metricsRef}>
+          {/* Headline Metrics — Desktop */}
+          <div
+            className="results-metrics-desktop"
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            {metrics.map((m, i) => (
+              <div key={i} style={{ display: 'contents' }}>
+                {i > 0 && (
+                  <div
+                    style={{
+                      width: '1px',
+                      height: '80px',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      flexShrink: 0,
+                    }}
+                  />
+                )}
+                <MetricItem {...m} triggered={metricsVisible} />
+              </div>
+            ))}
+          </div>
 
-        {/* Headline Metrics — Mobile */}
-        <div
-          className="results-metrics-mobile"
-          style={{
-            display: 'none',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          {metrics.map((m, i) => (
-            <div key={i}>
-              {i > 0 && (
-                <div
-                  style={{
-                    height: '1px',
-                    width: '120px',
-                    background: 'rgba(255, 255, 255, 0.08)',
-                    margin: '24px auto',
-                  }}
-                />
-              )}
-              <MetricItem {...m} triggered={metricsVisible} />
-            </div>
-          ))}
+          {/* Headline Metrics — Mobile */}
+          <div
+            className="results-metrics-mobile"
+            style={{
+              display: 'none',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            {metrics.map((m, i) => (
+              <div key={i}>
+                {i > 0 && (
+                  <div
+                    style={{
+                      height: '1px',
+                      width: '120px',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      margin: '24px auto',
+                    }}
+                  />
+                )}
+                <MetricItem {...m} triggered={metricsVisible} />
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Testimonial Cards */}
@@ -293,7 +295,7 @@ export default function Results() {
             border: '1px solid rgba(255, 255, 255, 0.06)',
             borderRadius: '16px',
             boxShadow: '0 4px 24px rgba(0, 0, 0, 0.04)',
-            padding: '40px',
+            padding: 'clamp(24px, 5vw, 40px)',
             marginTop: '40px',
             boxSizing: 'border-box',
           }}
@@ -319,7 +321,7 @@ export default function Results() {
             className="results-casestudy-columns"
             style={{
               display: 'flex',
-              gap: '40px',
+              gap: 'clamp(24px, 4vw, 40px)',
               flexWrap: 'wrap',
             }}
           >

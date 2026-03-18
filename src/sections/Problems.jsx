@@ -94,7 +94,7 @@ const styles = {
   section: {
     width: "100%",
     background: "linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)",
-    padding: "100px 0",
+    padding: "clamp(48px, 8vw, 100px) 0",
     position: "relative",
     overflow: "hidden",
   },
@@ -157,7 +157,7 @@ const styles = {
   },
   stat: {
     fontFamily: "'DM Sans', sans-serif",
-    fontSize: "52px",
+    fontSize: "clamp(40px, 10vw, 52px)",
     fontWeight: 700,
     color: "#3EBF70",
   },

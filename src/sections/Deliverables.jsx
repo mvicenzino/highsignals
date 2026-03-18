@@ -70,7 +70,7 @@ export default function Deliverables() {
   }, []);
 
   return (
-    <section style={{ width: "100%", background: "#0E1E30", padding: "100px 0" }}>
+    <section style={{ width: "100%", background: "#0E1E30", padding: "clamp(48px, 8vw, 100px) 0" }}>
       <div style={{ maxWidth: "80rem", margin: "0 auto", padding: "0 1.5rem" }}>
         {/* Header */}
         <div style={{ textAlign: "center" }}>

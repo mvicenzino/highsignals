@@ -48,7 +48,7 @@ export default function Contact() {
   const sectionStyle = {
     width: "100%",
     background: "#0E1E30",
-    padding: "80px 0",
+    padding: "clamp(48px, 8vw, 80px) 0",
   };
 
   const containerStyle = {

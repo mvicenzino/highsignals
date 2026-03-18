@@ -49,7 +49,7 @@ export default function DiagnosticCTA() {
       style={{
         width: '100%',
         background: 'linear-gradient(160deg, #0D1B2A 0%, #162D4A 50%, #0F2235 100%)',
-        padding: '80px 0',
+        padding: 'clamp(48px, 8vw, 80px) 0',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -83,7 +83,7 @@ export default function DiagnosticCTA() {
           }}
         >
           {/* Left Column */}
-          <div style={{ flex: '1 1 55%', minWidth: '300px' }}>
+          <div style={{ flex: '1 1 55%', minWidth: '0' }}>
             <h2
               style={{
                 fontFamily: "'Playfair Display', serif",

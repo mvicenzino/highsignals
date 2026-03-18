@@ -85,7 +85,7 @@ export default function SolutionsPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section style={{ width: '100%', background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)', padding: '120px 0 80px' }}>
+      <section style={{ width: '100%', background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)', padding: 'clamp(100px, 15vw, 120px) 0 clamp(48px, 8vw, 80px)' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
           <h1
             style={{
@@ -101,7 +101,7 @@ export default function SolutionsPage() {
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: '18px',
+              fontSize: 'clamp(15px, 3.5vw, 18px)',
               color: 'rgba(255,255,255,0.7)',
               maxWidth: '600px',
               margin: '12px auto 0',
@@ -134,7 +134,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* ── HOW WE ENGAGE ── */}
-      <section style={{ width: '100%', background: '#0B1929', padding: '100px 0' }}>
+      <section style={{ width: '100%', background: '#0B1929', padding: 'clamp(48px, 8vw, 100px) 0' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
           <p style={labelStyle}>THE PROCESS</p>
           <h2
@@ -285,7 +285,7 @@ export default function SolutionsPage() {
       </section>
 
       {/* ── ENGAGEMENT MODELS ── */}
-      <section style={{ width: '100%', background: '#0E1E30', padding: '100px 0' }}>
+      <section style={{ width: '100%', background: '#0E1E30', padding: 'clamp(48px, 8vw, 100px) 0' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem' }}>
           <p style={labelStyle}>ENGAGEMENT OPTIONS</p>
           <h2

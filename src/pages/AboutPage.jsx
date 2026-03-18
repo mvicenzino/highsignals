@@ -58,7 +58,7 @@ export default function AboutPage() {
       <section
         style={{
           background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 50%, #0F2235 100%)',
-          padding: '120px 0 80px',
+          padding: 'clamp(100px, 15vw, 120px) 0 clamp(48px, 8vw, 80px)',
           color: '#fff',
         }}
       >
@@ -77,7 +77,7 @@ export default function AboutPage() {
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: '18px',
+              fontSize: 'clamp(15px, 3.5vw, 18px)',
               color: 'rgba(255,255,255,0.75)',
               maxWidth: '640px',
               lineHeight: 1.6,
@@ -92,7 +92,7 @@ export default function AboutPage() {
       </section>
 
       {/* TEAM SECTION */}
-      <section style={{ background: '#0B1929', padding: '80px 0' }}>
+      <section style={{ background: '#0B1929', padding: 'clamp(48px, 8vw, 80px) 0' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <p
             style={{
@@ -181,7 +181,7 @@ export default function AboutPage() {
       </section>
 
       {/* ADVISORY BOARD */}
-      <section style={{ background: '#0E1E30', padding: '80px 0' }}>
+      <section style={{ background: '#0E1E30', padding: 'clamp(48px, 8vw, 80px) 0' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
           <p
             style={{
@@ -269,7 +269,7 @@ export default function AboutPage() {
       </section>
 
       {/* VALUES SECTION */}
-      <section style={{ background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 100%)', padding: '80px 0', color: '#fff' }}>
+      <section style={{ background: 'linear-gradient(160deg, #0D1B2A 0%, #142D4A 100%)', padding: 'clamp(48px, 8vw, 80px) 0', color: '#fff' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
           <h2
             style={{
@@ -300,7 +300,7 @@ export default function AboutPage() {
                 <span
                   style={{
                     fontFamily: "'Playfair Display', serif",
-                    fontSize: '64px',
+                    fontSize: 'clamp(48px, 10vw, 64px)',
                     color: 'rgba(255,255,255,0.08)',
                     position: 'absolute',
                     top: '16px',
@@ -316,7 +316,7 @@ export default function AboutPage() {
                     fontSize: '18px',
                     fontWeight: 600,
                     color: '#fff',
-                    marginLeft: '60px',
+                    marginLeft: 'clamp(48px, 12vw, 60px)',
                     marginTop: 0,
                     marginBottom: 0,
                   }}
@@ -329,7 +329,7 @@ export default function AboutPage() {
                     fontSize: '14px',
                     color: 'rgba(255,255,255,0.6)',
                     lineHeight: 1.6,
-                    marginLeft: '60px',
+                    marginLeft: 'clamp(48px, 12vw, 60px)',
                     marginTop: '8px',
                     marginBottom: 0,
                   }}
