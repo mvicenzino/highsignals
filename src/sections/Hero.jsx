@@ -101,7 +101,8 @@ export default function Hero() {
   return (
     <section
       style={{
-        minHeight: '85vh',
+        height: '85vh',
+        maxHeight: '900px',
         background: 'linear-gradient(160deg, #0B1929 0%, #10263E 40%, #0D1F32 100%)',
         display: 'flex',
         alignItems: 'center',
@@ -167,7 +168,7 @@ export default function Hero() {
 
         {/* Right Column — Radar Visual */}
         <div className="hero-right" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ position: 'relative', width: '380px', height: '380px' }}>
+          <div style={{ position: 'relative', width: '320px', height: '320px' }}>
             {/* Ambient glow */}
             <div style={{
               position: 'absolute', inset: '-40px',
