@@ -189,7 +189,7 @@ export default function Hero() {
             }} />
 
             {/* SVG Radar */}
-            <svg viewBox="0 0 380 380" width="380" height="380" style={{ position: 'relative', zIndex: 1 }}>
+            <svg viewBox="0 0 380 380" width="100%" height="100%" style={{ position: 'relative', zIndex: 1 }}>
               {/* Rotating outer ring */}
               <g style={{ transformOrigin: '190px 190px', animation: 'rotate-slow 60s linear infinite' }}>
                 <circle cx="190" cy="190" r="170" fill="none" stroke="rgba(62, 191, 112, 0.08)" strokeWidth="1" strokeDasharray="4 8" />
