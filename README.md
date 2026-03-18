@@ -1,16 +1,48 @@
-# React + Vite
+# HighSignals.com — Website Redesign
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Marketing website for **HighSignals**, a Launch Intelligence company that helps B2B SaaS & AI companies build pressure-tested GTM launch plans.
 
-Currently, two official plugins are available:
+**Live site:** [highsignals.vercel.app](https://highsignals.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- **React 18** + **Vite**
+- **Tailwind CSS v3**
+- **React Router v6** (BrowserRouter)
+- Deployed on **Vercel**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Pages
 
-## Expanding the ESLint configuration
+| Route | Description |
+|-------|-------------|
+| `/` | Homepage — Hero, Social Proof, Problems, Deliverables, Results, Diagnostic CTA, Contact |
+| `/solutions` | Solutions — Engagement process, 3 pricing tiers, Deliverables, Diagnostic CTA |
+| `/about` | About — Team, Advisory Board, Values |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Design
+
+- Dark navy theme (`#0B1929` base)
+- Liquid glass UI — translucent buttons with `backdrop-filter: blur()`, layered box shadows
+- Animated fluid blob hero background
+- Custom SVG logo mark (circular radar/targeting design)
+- Google Fonts: Playfair Display (display) + DM Sans (body)
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Deployment
+
+```bash
+npm run build     # Vite production build → dist/
+vercel --prod     # Deploy to Vercel
+```
+
+SPA routing handled via `vercel.json` rewrites.
+
+## Credits
+
+Designed and built by [Cloverhill AI](https://cloverhill.vercel.app)
