@@ -188,8 +188,8 @@ export default function Hero() {
               boxShadow: '0 12px 48px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04), inset 0 0 80px rgba(255, 255, 255, 0.01)',
             }} />
 
-            {/* SVG Radar — viewBox matched to render size for crisp text */}
-            <svg viewBox="0 0 420 420" width="100%" height="100%" style={{ position: 'relative', zIndex: 1 }}>
+            {/* SVG Radar */}
+            <svg viewBox="-30 -30 480 480" width="100%" height="100%" style={{ position: 'relative', zIndex: 1, overflow: 'visible' }}>
               <defs>
                 <linearGradient id="arc-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#5AEAA8" />
@@ -241,7 +241,7 @@ export default function Hero() {
               {/* Spokes + dimension labels */}
               {dimensions.map((label, i) => {
                 const angle = (i * 45 - 90) * Math.PI / 180
-                const labelR = 182
+                const labelR = 200
                 const x = 210 + labelR * Math.cos(angle)
                 const y = 210 + labelR * Math.sin(angle)
                 const lineEnd = 165
