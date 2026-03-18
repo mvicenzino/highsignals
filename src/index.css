@@ -216,6 +216,37 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
+/* ── Nav Glass Pills ── */
+.nav-pill {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.nav-pill:hover {
+  color: #E2E8F0 !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.nav-pill-active {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 2px 12px rgba(62, 191, 112, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.nav-pill-active:hover {
+  background: rgba(62, 191, 112, 0.15) !important;
+  border-color: rgba(62, 191, 112, 0.25) !important;
+  color: #3EBF70 !important;
+}
+
 /* ── Glass Cards (dark theme) ── */
 .glass-card {
   background: rgba(255, 255, 255, 0.04);

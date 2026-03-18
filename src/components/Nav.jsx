@@ -57,9 +57,11 @@ export default function Nav() {
     letterSpacing: '0.03em',
     color: isActive(link) ? '#3EBF70' : 'rgba(226, 232, 240, 0.6)',
     textDecoration: 'none',
-    paddingBottom: '4px',
-    borderBottom: isActive(link) ? '2px solid #3EBF70' : '2px solid transparent',
+    padding: '6px 14px',
+    borderRadius: '10px',
     cursor: 'pointer',
+    background: isActive(link) ? 'rgba(62, 191, 112, 0.1)' : 'transparent',
+    border: isActive(link) ? '1px solid rgba(62, 191, 112, 0.15)' : '1px solid transparent',
   })
 
   const mobileLinkStyle = (link) => ({
@@ -76,16 +78,10 @@ export default function Nav() {
   })
 
   const renderLink = (link, style) => {
+    const cls = `nav-pill${isActive(link) ? ' nav-pill-active' : ''}`
     if (link.to) {
       return (
-        <Link
-          key={link.label}
-          to={link.to}
-          className="relative transition-colors duration-200"
-          style={style}
-          onMouseEnter={(e) => { if (!isActive(link)) e.currentTarget.style.color = '#E2E8F0' }}
-          onMouseLeave={(e) => { if (!isActive(link)) e.currentTarget.style.color = 'rgba(226, 232, 240, 0.6)' }}
-        >
+        <Link key={link.label} to={link.to} className={cls} style={style}>
           {link.label}
         </Link>
       )
@@ -95,12 +91,10 @@ export default function Nav() {
         key={link.label}
         role="button"
         tabIndex={0}
-        className="relative transition-colors duration-200"
+        className={cls}
         style={style}
         onClick={() => scrollToSection(link.section)}
         onKeyDown={(e) => { if (e.key === 'Enter') scrollToSection(link.section) }}
-        onMouseEnter={(e) => { e.currentTarget.style.color = '#E2E8F0' }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(226, 232, 240, 0.6)' }}
       >
         {link.label}
       </span>
