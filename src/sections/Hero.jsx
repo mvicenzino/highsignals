@@ -139,13 +139,13 @@ export default function Hero() {
 
           {/* CTAs */}
           <div style={{ ...fadeUp(0.3), display: 'flex', flexWrap: 'wrap', gap: '12px', marginTop: '32px', alignItems: 'center' }}>
-            <button className="btn-glass-primary" style={{ fontSize: '15px', padding: '16px 32px' }} onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button className="btn-glass-primary" style={{ fontSize: '15px', padding: '16px 32px' }} onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}>
               Get Your Launch Readiness Score
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '4px' }}>
                 <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
-            <button className="btn-glass-secondary" onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button className="btn-glass-secondary" onClick={() => { const el = document.getElementById('solutions'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}>
               See How It Works
             </button>
           </div>

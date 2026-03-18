@@ -114,7 +114,7 @@ export default function DiagnosticCTA() {
             <button
               className="btn-glass-primary"
               style={{ fontSize: '15px', padding: '16px 32px', marginTop: '28px' }}
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}
             >
               Get Your Launch Readiness Score &rarr;
             </button>

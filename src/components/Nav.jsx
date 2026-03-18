@@ -4,7 +4,7 @@ import Logo from './Logo'
 
 const NAV_LINKS = [
   { label: 'Solutions', to: '/solutions' },
-  { label: 'Verticals', section: 'solutions' },
+  { label: 'Playbook', section: 'solutions' },
   { label: 'Results', section: 'results' },
   { label: 'Resources', section: 'resources' },
   { label: 'About', to: '/about' },
@@ -32,18 +32,21 @@ export default function Nav() {
     return false
   }
 
+  const smoothScrollTo = (sectionId) => {
+    const el = document.getElementById(sectionId)
+    if (!el) return
+    const navHeight = 80 // nav height + a little breathing room
+    const top = el.getBoundingClientRect().top + window.scrollY - navHeight
+    window.scrollTo({ top, behavior: 'smooth' })
+  }
+
   const scrollToSection = useCallback((sectionId) => {
     setMobileOpen(false)
     if (location.pathname !== '/') {
-      // Navigate home first, then scroll after render
       navigate('/')
-      setTimeout(() => {
-        const el = document.getElementById(sectionId)
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 100)
+      setTimeout(() => smoothScrollTo(sectionId), 150)
     } else {
-      const el = document.getElementById(sectionId)
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      smoothScrollTo(sectionId)
     }
   }, [location.pathname, navigate])
 

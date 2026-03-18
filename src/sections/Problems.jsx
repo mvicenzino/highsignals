@@ -81,7 +81,7 @@ export default function Problems() {
         </p>
 
         <div style={styles.ctaWrapper}>
-          <button className="btn-glass-ghost" onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}>
+          <button className="btn-glass-ghost" onClick={() => { const el = document.getElementById('solutions'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}>
             See the Playbook →
           </button>
         </div>

@@ -116,7 +116,7 @@ export default function SolutionsPage() {
             style={{
               marginTop: '28px',
             }}
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}
           >
             Run the Readiness Diagnostic&trade;
           </button>
@@ -396,7 +396,7 @@ export default function SolutionsPage() {
                       width: '100%',
                       justifyContent: 'center',
                     }}
-                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}
                   >
                     {eng.cta}
                   </button>

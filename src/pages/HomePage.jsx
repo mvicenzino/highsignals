@@ -10,8 +10,8 @@ export default function HomePage() {
     <>
       <Hero />
       <SocialProof />
-      <div id="solutions"><Deliverables /></div>
       <Problems />
+      <div id="solutions"><Deliverables /></div>
       <div id="results"><Results /></div>
       <div id="resources"><DiagnosticCTA /></div>
     </>

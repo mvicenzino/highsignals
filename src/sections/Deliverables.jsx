@@ -206,7 +206,7 @@ export default function Deliverables() {
 
         {/* CTA */}
         <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <button className="btn-glass-primary" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+          <button className="btn-glass-primary" onClick={() => { const el = document.getElementById('contact'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' }) }}>
             Start the Conversation &rarr;
           </button>
         </div>
